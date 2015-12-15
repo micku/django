@@ -4,7 +4,7 @@ Internationalization support.
 from __future__ import unicode_literals
 import re
 from django.utils.decorators import ContextDecorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_text, force_str
 from django.utils.functional import lazy
 from django.utils import six
 
@@ -78,7 +78,7 @@ def get_i18n_backend(i18n_backend_name, settings):
         i18n_module_name = '.'.join(i18n_path[:-1])
     else:
         i18n_module_name = '.'
-    i18n_module = __import__(i18n_module_name, {}, {}, force_text(i18n_path[-1]))
+    i18n_module = __import__(i18n_module_name, {}, {}, force_str(i18n_path[-1]))
     return getattr(i18n_module, i18n_path[-1])()
 
 class Trans(object):
